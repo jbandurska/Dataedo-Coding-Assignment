@@ -34,6 +34,10 @@ button {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
+
+  &:disabled {
+    cursor: default;
+  }
 }
 
 button.primary {

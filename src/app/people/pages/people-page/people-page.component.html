@@ -1,5 +1,5 @@
 <div class="user">
-  @if (user$ | async; as user) {
+  @if (user) {
   <img
     [src]="user.picture.large"
     [alt]="user | fullName"
@@ -16,13 +16,14 @@
   <button
     type="button"
     class="primary"
-    (click)="getNewUser()"
+    [disabled]="isLoading"
+    (click)="getNewUserAndReset()"
     (mouseenter)="stopTimer()"
     (mouseleave)="resumeTimer()"
   >
     New
   </button>
   } @else {
-  <p class="loading">Loading...</p>
+  <img class="spinner" src="assets/svg/spinner.svg" alt="spinner" />
   }
 </div>

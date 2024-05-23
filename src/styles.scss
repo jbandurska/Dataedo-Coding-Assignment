@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #238cd8;
+  --primary-color-light: #3da6f2;
+  --primary-color-dark: #0a73bf;
+  --text-color: #383838;
+  --text-color-light: #fff;
+  --secondary-text-color: #aaa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:active {
+    color: var(--primary-color);
+  }
+}
+
+button {
+  border: none;
+  border-radius: 7px;
+  padding: 0.6rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button.primary {
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
+
+  &:hover {
+    background-color: var(--primary-color-light);
+  }
+
+  &:active {
+    background-color: var(--primary-color-dark);
+  }
+}

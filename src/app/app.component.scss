@@ -1,0 +1,25 @@
+#app {
+  min-height: 100vh;
+  padding: 5px 30px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+  list-style-type: none;
+
+  li {
+    a {
+      text-transform: capitalize;
+    }
+
+    a.active {
+      font-weight: 600;
+    }
+  }
+}

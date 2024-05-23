@@ -1,0 +1,28 @@
+<div class="user">
+  @if (user$ | async; as user) {
+  <img
+    [src]="user.picture.large"
+    [alt]="user | fullName"
+    class="picture"
+    (mouseenter)="stopTimer()"
+    (mouseleave)="resumeTimer()"
+  />
+  <div class="info">
+    <p class="greeting">Hi, My name is</p>
+    <p class="name" (mouseenter)="stopTimer()" (mouseleave)="resumeTimer()">
+      {{ user | fullName }}
+    </p>
+  </div>
+  <button
+    type="button"
+    class="primary"
+    (click)="getNewUser()"
+    (mouseenter)="stopTimer()"
+    (mouseleave)="resumeTimer()"
+  >
+    New
+  </button>
+  } @else {
+  <p class="loading">Loading...</p>
+  }
+</div>

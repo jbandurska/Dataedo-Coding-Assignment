@@ -1,70 +1,72 @@
 export class Timer {
-  private ms!: number;
-  private callback!: () => void;
+  private _ms!: number;
+  private _callback!: () => void;
 
-  private timeoutIds: ReturnType<typeof setTimeout>[] = [];
-  private lastTimeoutStart?: number;
-  private remainingTime?: number;
-  private isStopped = true;
+  private _timeoutId?: ReturnType<typeof setTimeout>;
+  private _isStopped = true;
+
+  private _timerStart!: number;
+  private _timerNextIn!: number;
 
   constructor(callback: () => void, ms?: number) {
-    this.callback = callback;
-    this.ms = ms && ms > 0 ? ms : 1;
+    this._callback = callback;
+    this._ms = ms && ms > 0 ? ms : 1;
 
-    this.setRecursiveTimeout();
+    this._timerStart = new Date().getTime();
+    this._timerNextIn = this._ms;
+
+    this._setRecursiveTimeout();
   }
 
   stop() {
-    if (this.lastTimeoutStart) {
-      this.clearTimeouts();
-      const now = new Date().getTime();
-      const shouldEnd = this.lastTimeoutStart + this.ms;
-      this.remainingTime = shouldEnd - now;
-      this.isStopped = true;
-    }
+    this._clearTimeout();
+
+    const timerStop = new Date().getTime();
+    const timePassed = timerStop - this._timerStart;
+    this._timerNextIn -= timePassed;
+
+    this._isStopped = true;
   }
 
   resume() {
-    if (this.remainingTime) {
-      this.isStopped = false;
-
-      const id = setTimeout(() => {
-        this.lastTimeoutStart = new Date().getTime();
-        this.callback();
-        this.setRecursiveTimeout();
-      }, this.remainingTime);
-
-      this.timeoutIds.push(id);
-    }
+    this._timerStart = new Date().getTime();
+    this._setRecursiveTimeout();
   }
 
   reset() {
-    this.clearTimeouts();
-    if (this.isStopped) {
-      this.remainingTime = this.ms;
-    } else {
-      this.setRecursiveTimeout();
+    this._clearTimeout();
+    this._timerNextIn = this._ms;
+
+    if (!this._isStopped) {
+      this._setRecursiveTimeout();
     }
   }
 
   destroy() {
-    this.clearTimeouts();
+    this._clearTimeout();
+    this._isStopped = true;
   }
 
-  private clearTimeouts() {
-    this.timeoutIds.forEach((id) => clearTimeout(id));
-    this.timeoutIds = [];
+  private _clearTimeout() {
+    if (this._timeoutId) {
+      clearTimeout(this._timeoutId);
+      this._timeoutId = undefined;
+    }
   }
 
-  private setRecursiveTimeout() {
-    this.isStopped = false;
+  private _setRecursiveTimeout() {
+    this._isStopped = false;
 
-    const id = setTimeout(() => {
-      this.lastTimeoutStart = new Date().getTime();
-      this.callback();
-      this.setRecursiveTimeout();
-    }, this.ms);
+    // to make sure we don't set multiple timeouts at once
+    this._clearTimeout();
 
-    this.timeoutIds.push(id);
+    this._timeoutId = setTimeout(() => {
+      this._callback();
+
+      this._timerStart = new Date().getTime();
+      this._timerNextIn = this._ms;
+
+      this._setRecursiveTimeout();
+    }, this._timerNextIn);
   }
 }

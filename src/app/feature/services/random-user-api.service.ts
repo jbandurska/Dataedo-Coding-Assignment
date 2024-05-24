@@ -12,7 +12,7 @@ export class RandomUserAPIService {
   public getRandomUser(): Observable<RandomUserResponse> {
     let params = new HttpParams();
 
-    params = params.set('inc', 'name, picture');
+    params = params.set('inc', 'name,picture');
     params = params.set('noinfo', true);
 
     return this.http.get<RandomUserResponse>('https://randomuser.me/api/', {

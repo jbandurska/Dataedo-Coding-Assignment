@@ -8,10 +8,9 @@ describe('AboutPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AboutPageComponent]
-    })
-    .compileComponents();
-    
+      imports: [AboutPageComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AboutPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +18,12 @@ describe('AboutPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render title', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain(
+      'Recruitment task'
+    );
   });
 });

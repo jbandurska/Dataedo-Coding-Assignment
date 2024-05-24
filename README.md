@@ -1,27 +1,39 @@
-# DataedoCodingAssignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+# Dataedo Coding Assignment
 
-## Development server
+Assignment completed for the recruitment process in Dataedo.
+## Run Locally
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Clone the project
 
-## Code scaffolding
+```bash
+  git clone https://github.com/jbandurska/Dataedo-Coding-Assignment.git
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Go to the project directory
 
-## Build
+```bash
+  cd Dataedo-Coding-Assignment
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Install dependencies
 
-## Running unit tests
+```bash
+  npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Start the server
 
-## Running end-to-end tests
+```bash
+  npm run start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The server should now be accessible at `http://localhost:4200/`. 
+## Running Tests
 
-## Further help
+To run tests, run the following command
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+  npm run test
+```
+

@@ -2,6 +2,9 @@
 # Dataedo Coding Assignment
 
 Assignment completed for the recruitment process in Dataedo.
+
+The app is available live at [https://jbandurska.github.io/Dataedo-Coding-Assignment/](https://jbandurska.github.io/Dataedo-Coding-Assignment/).
+
 ## Run Locally
 
 Clone the project

@@ -41,8 +41,8 @@ export class PeoplePageComponent implements OnInit, OnDestroy {
   }
 
   protected getNewUser(): void {
-    this.userService.getNewUser();
     this.isLoading = true;
+    this.userService.getNewUser();
   }
 
   protected getNewUserAndReset(): void {

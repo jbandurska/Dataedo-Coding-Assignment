@@ -1,12 +1,12 @@
 export class Timer {
-  private _ms!: number;
-  private _callback!: () => void;
+  private _ms: number;
+  private _callback: () => void;
 
   private _timeoutId?: ReturnType<typeof setTimeout>;
   private _isStopped = true;
 
-  private _timerStart!: number;
-  private _timerNextIn!: number;
+  private _timerStart: number;
+  private _timerNextIn: number;
 
   constructor(callback: () => void, ms?: number) {
     this._callback = callback;
@@ -19,18 +19,22 @@ export class Timer {
   }
 
   stop() {
-    this._clearTimeout();
+    if (!this._isStopped) {
+      this._clearTimeout();
 
-    const timerStop = new Date().getTime();
-    const timePassed = timerStop - this._timerStart;
-    this._timerNextIn -= timePassed;
+      const timerStop = new Date().getTime();
+      const timePassed = timerStop - this._timerStart;
+      this._timerNextIn -= timePassed;
 
-    this._isStopped = true;
+      this._isStopped = true;
+    }
   }
 
   resume() {
-    this._timerStart = new Date().getTime();
-    this._setRecursiveTimeout();
+    if (this._isStopped) {
+      this._timerStart = new Date().getTime();
+      this._setRecursiveTimeout();
+    }
   }
 
   reset() {

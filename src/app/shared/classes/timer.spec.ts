@@ -67,6 +67,23 @@ describe('Timer', () => {
     expect(callbackSpy).toHaveBeenCalledTimes(1); // passed 60ms, should have been called 10 ms ago
   });
 
+  it('double resume() should resume only once', async () => {
+    expect(callbackSpy).not.toHaveBeenCalled();
+
+    timer.stop(); //passed 0ms
+    await delay(20);
+
+    timer.resume();
+    expect(callbackSpy).not.toHaveBeenCalled();
+    await delay(20);
+
+    timer.resume(); // passed 20ms
+    expect(callbackSpy).not.toHaveBeenCalled();
+    await delay(40);
+
+    expect(callbackSpy).toHaveBeenCalledTimes(1); // passed 60ms, should have been called 10 ms ago
+  });
+
   it('should destroy the timer', async () => {
     expect(callbackSpy).not.toHaveBeenCalled();
 
